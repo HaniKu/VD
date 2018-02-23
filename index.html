@@ -24,10 +24,6 @@ var datas_small = []
 $.getJSON( "https://raw.githubusercontent.com/HaniKu/VD/master/example.json", function(data) {
 //https://raw.githubusercontent.com/vega/vega-datasets/gh-pages/data/movies.json
 dataPoints = data
-<<<<<<< HEAD
-=======
-
->>>>>>> 433f9f86ee0c6ed4ae42001bb56e5134ffc9c63f
 for(var i = 0; i < dataPoints.length; i++) { //dataPoints.length
   label[i] = dataPoints[i].Title
   datas[i] = dataPoints[i].Worldwide_Gross - dataPoints[i].Production_Budget
@@ -72,7 +68,7 @@ var chart = new Chart(ctx, {
         yAxes: [{
           scaleLabel: {
             display: true,
-            labelString: "money"
+            labelString: "suma peňazí"
           }
         }],
         xAxes: [{
@@ -92,7 +88,6 @@ var chart = new Chart(ctx, {
        data: {
           labels: label_medium,
           datasets: [{
-            label: "zárobok",
             borderColor: colours_medium,
             backgroundColor: colours_medium,
             data: datas_medium
@@ -102,21 +97,16 @@ var chart = new Chart(ctx, {
          title: {
           display: true,
           responsive: 'true',
-          text: 'zárobok jednotlivých filmov (2000 záznamov)'
+          text: 'zárobok jednotlivých filmov (1000 záznamov)'
        },
+       legend: {
+              display: false,
+          },
        scales: {
           yAxes: [{
             scaleLabel: {
               display: true,
-              labelString: "money"
-            }
-          }],
-          xAxes: [{
-            ticks: {
-              autoSkip : true,
-            },
-            gridLines : {
-              display : false,
+              labelString: "suma peňazí"
             }
           }]
         }
@@ -128,7 +118,6 @@ var chart = new Chart(ctx, {
          data: {
             labels: label_small,
             datasets: [{
-              label: ['positive', 'negative'],
               borderColor: colours_small,
               backgroundColor: colours_small,
               data: datas_small
@@ -140,19 +129,19 @@ var chart = new Chart(ctx, {
             responsive: 'true',
             text: 'zárobok jednotlivých filmov (100 záznamov)'
          },
+         legend: {
+                display: false,
+            },
          scales: {
             yAxes: [{
               scaleLabel: {
                 display: true,
-                labelString: "money"
+                labelString: "suma peňazí"
               }
             }],
             xAxes: [{
               ticks: {
                 autoSkip : false,
-              },
-              gridLines : {
-                display : false,
               }
             }]
           }
