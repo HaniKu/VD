@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Chart.js demo</title>
+        <!-- import plugin script -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js'></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    </head>
+    <body>
+      <canvas id="bar-chart" width="400" height="75"></canvas>
+      <canvas id="bar-chart_medium" width="400" height="75"></canvas>
+      <canvas id="bar-chart_small" width="400" height="75"></canvas>
+
+<script>
+var dataPoints = []
+var label = []
+var datas = []
+var label_medium = []
+var datas_medium = []
+var label_small = []
+var datas_small = []
+$.getJSON( "https://raw.githubusercontent.com/HaniKu/VD/master/example.json", function(data) {
+//https://raw.githubusercontent.com/vega/vega-datasets/gh-pages/data/movies.json
+dataPoints = data
+<<<<<<< HEAD
+=======
+
+>>>>>>> 433f9f86ee0c6ed4ae42001bb56e5134ffc9c63f
+for(var i = 0; i < dataPoints.length; i++) { //dataPoints.length
+  label[i] = dataPoints[i].Title
+  datas[i] = dataPoints[i].Worldwide_Gross - dataPoints[i].Production_Budget
+  if(i < 100){
+    label_small[i] = dataPoints[i].Title
+    datas_small[i] = dataPoints[i].Worldwide_Gross - dataPoints[i].Production_Budget
+  }
+  if(i < 1000){
+    label_medium[i] = dataPoints[i].Title
+    datas_medium[i] = dataPoints[i].Worldwide_Gross - dataPoints[i].Production_Budget
+  }
+}
+console.log(dataPoints.length)
+var ctx = document.getElementById('bar-chart').getContext('2d');
+var ctx_medium = document.getElementById('bar-chart_medium').getContext('2d');
+var ctx_small = document.getElementById('bar-chart_small').getContext('2d');
+const colours = datas.map((value) => value < 0 ? 'red' : 'green');
+const colours_medium = datas_medium.map((value) => value < 0 ? 'red' : 'green');
+const colours_small = datas_small.map((value) => value < 0 ? 'red' : 'green');
+//big data
+var chart = new Chart(ctx, {
+     type: 'bar',
+     data: {
+        labels: label,
+        datasets: [{
+        //  label: ['positive', 'negative'],
+          borderColor: colours,
+          backgroundColor: colours,
+          data: datas
+        }]
+     },
+     options: {
+       title: {
+        display: true,
+        responsive: 'true',
+        text: 'zárobok jednotlivých filmov (12801 záznamov)'
+     },
+     legend: {
+            display: false,
+        },
+     scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: "money"
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            autoSkip : false,
+          },
+          gridLines : {
+            display : false,
+          }
+        }]
+      }
+    }
+  });
+  //medium data
+  var chart1 = new Chart(ctx_medium, {
+       type: 'bar',
+       data: {
+          labels: label_medium,
+          datasets: [{
+            label: "zárobok",
+            borderColor: colours_medium,
+            backgroundColor: colours_medium,
+            data: datas_medium
+          }]
+       },
+       options: {
+         title: {
+          display: true,
+          responsive: 'true',
+          text: 'zárobok jednotlivých filmov (2000 záznamov)'
+       },
+       scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: "money"
+            }
+          }],
+          xAxes: [{
+            ticks: {
+              autoSkip : true,
+            },
+            gridLines : {
+              display : false,
+            }
+          }]
+        }
+      }
+    });
+    //small data
+    var chart2 = new Chart(ctx_small, {
+         type: 'bar',
+         data: {
+            labels: label_small,
+            datasets: [{
+              label: ['positive', 'negative'],
+              borderColor: colours_small,
+              backgroundColor: colours_small,
+              data: datas_small
+            }]
+         },
+         options: {
+           title: {
+            display: true,
+            responsive: 'true',
+            text: 'zárobok jednotlivých filmov (100 záznamov)'
+         },
+         scales: {
+            yAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: "money"
+              }
+            }],
+            xAxes: [{
+              ticks: {
+                autoSkip : false,
+              },
+              gridLines : {
+                display : false,
+              }
+            }]
+          }
+        }
+      });
+})
+</script>
+    </body>
+</html>
