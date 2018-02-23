@@ -50,11 +50,7 @@ var chart = new Chart(ctx, {
      data: {
         labels: label,
         datasets: [{
-        /*  fillColor: ["rgba(220,220,220,0.5)", "navy", "red", "orange"],
-          strokeColor: "rgba(220,220,220,0.8)",
-          highlightFill: "rgba(220,220,220,0.75)",
-          highlightStroke: "rgba(220,220,220,1)",*/
-          label: "zárobok",
+        //  label: ['positive', 'negative'],
           borderColor: colours,
           backgroundColor: colours,
           data: datas
@@ -66,6 +62,9 @@ var chart = new Chart(ctx, {
         responsive: 'true',
         text: 'zárobok jednotlivých filmov (12801 záznamov)'
      },
+     legend: {
+            display: false,
+        },
      scales: {
         yAxes: [{
           scaleLabel: {
@@ -126,7 +125,7 @@ var chart = new Chart(ctx, {
          data: {
             labels: label_small,
             datasets: [{
-              label: "zárobok",
+              label: ['positive', 'negative'],
               borderColor: colours_small,
               backgroundColor: colours_small,
               data: datas_small
