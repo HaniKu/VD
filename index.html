@@ -14,53 +14,61 @@
       <div style="width: 100%; height: 100%;">
 </div>
 <script>
-/*
-new Chart(document.getElementById("pie-chart"), {
-    type: 'pie',
-    data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-      datasets: [{
-        label: "Population (millions)",
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-        data: [2478,5267,734,784,433]
-      }]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Predicted world population (millions) in 2050'
-      }
-    }
-});*/
 var dataPoints = []
 var label = []
 var datas = []
-$.getJSON( "https://raw.githubusercontent.com/vega/vega-datasets/gh-pages/data/movies.json", function(data) {
+var budget = []
+$.getJSON( "https://raw.githubusercontent.com/HaniKu/VD/master/example.json", function(data) {
 //https://raw.githubusercontent.com/vega/vega-datasets/gh-pages/data/movies.json
 dataPoints = data
 
-for(var i = 0; i < dataPoints.length - 1; i++) {
+for(var i = 0; i < dataPoints.length; i++) { //dataPoints.length
   label[i] = dataPoints[i].Title
-  datas[i] = dataPoints[i].Worldwide_Gross
+  datas[i] = dataPoints[i].Worldwide_Gross - dataPoints[i].Production_Budget
+
+  //budget[i] = dataPoints[i].Production_Budget
 }
-  console.log(dataPoints.length - 1)
+console.log(dataPoints.length)
 var ctx = document.getElementById('bar-chart').getContext('2d');
+const colours = datas.map((value) => value < 0 ? 'red' : 'green');
 var chart = new Chart(ctx, {
      type: 'bar',
      data: {
         labels: label,
         datasets: [{
-          fillColor: ["rgba(220,220,220,0.5)", "navy", "red", "orange"],
+        /*  fillColor: ["rgba(220,220,220,0.5)", "navy", "red", "orange"],
           strokeColor: "rgba(220,220,220,0.8)",
           highlightFill: "rgba(220,220,220,0.75)",
-          highlightStroke: "rgba(220,220,220,1)",
-          backgroundColor:"rgba(206, 70, 90, 1)",
+          highlightStroke: "rgba(220,220,220,1)",*/
+          label: "zárobok",
+          borderColor: colours,
+          backgroundColor: colours,
           data: datas
         }]
      },
      options: {
+       title: {
+        display: true,
         responsive: 'true',
-     }
+        text: 'zárobok jednotlivých filmov (12801 záznamov)'
+     },
+     scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: "money"
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            autoSkip : false,
+          },
+          gridLines : {
+            display : false,
+          }
+        }]
+      }
+    }
   });
 })
 </script>
