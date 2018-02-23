@@ -14,7 +14,6 @@
       <canvas id="bar-chart_small" width="400" height="75"></canvas>
 
 <script>
-var dataPoints = []
 var label = []
 var datas = []
 var label_medium = []
@@ -22,21 +21,18 @@ var datas_medium = []
 var label_small = []
 var datas_small = []
 $.getJSON( "https://raw.githubusercontent.com/HaniKu/VD/master/example.json", function(data) {
-//https://raw.githubusercontent.com/vega/vega-datasets/gh-pages/data/movies.json
-dataPoints = data
-for(var i = 0; i < dataPoints.length; i++) { //dataPoints.length
-  label[i] = dataPoints[i].Title
-  datas[i] = dataPoints[i].Worldwide_Gross - dataPoints[i].Production_Budget
+for(var i = 0; i < data.length; i++) { //dataPoints.length
+  label[i] = data[i].Title
+  datas[i] = data[i].Worldwide_Gross - data[i].Production_Budget
   if(i < 100){
-    label_small[i] = dataPoints[i].Title
-    datas_small[i] = dataPoints[i].Worldwide_Gross - dataPoints[i].Production_Budget
+    label_small[i] = data[i].Title
+    datas_small[i] = data[i].Worldwide_Gross - data[i].Production_Budget
   }
   if(i < 1000){
-    label_medium[i] = dataPoints[i].Title
-    datas_medium[i] = dataPoints[i].Worldwide_Gross - dataPoints[i].Production_Budget
+    label_medium[i] = data[i].Title
+    datas_medium[i] = data[i].Worldwide_Gross - data[i].Production_Budget
   }
 }
-console.log(dataPoints.length)
 var ctx = document.getElementById('bar-chart').getContext('2d');
 var ctx_medium = document.getElementById('bar-chart_medium').getContext('2d');
 var ctx_small = document.getElementById('bar-chart_small').getContext('2d');
